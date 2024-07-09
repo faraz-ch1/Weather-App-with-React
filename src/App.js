@@ -1,24 +1,24 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Search from "./components/search"
+import Display from "./components/display"
 
 function App() {
+  const [weatherData, setWeatherData] = useState()
+  function passData(data){
+    return setWeatherData(data)
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div className="container">
+        <h1 className="title">Weather App</h1>
+        <Search getData={passData}/>
+        {weatherData && (<Display 
+            cityName = {weatherData.cityName}
+            temperature= {weatherData.temperature}
+            description= {weatherData.description}
+            feelslike = {weatherData.feelslike}
+            humidity= {weatherData.humidity} />)}
+      </div>
   );
 }
 
